@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css">
+	<title>Populer</title>
+</head>
+<body>
+	<div id="all">
+		<!-- kategori -->
+		<div class="header">
+			<h3>Populer: <strong>Musik, sport, sepeda</strong></h3>
+			
+		</div>
+		<!-- end kategori -->
+
+		<!-- wrapper product -->
+		<div id="wrapper-product">
+
+			<!-- detail product -->
+			<div class="product" v-for="product in products">
+				<div class="disc" data-diskon>{{ product.diskon }}</div>
+
+				<div class="product-img">
+					<img :src="product.gambar" alt="Chrome Bukalapak" data-gambar>
+				</div>
+				
+
+				<div class="product-description">
+					<h3 data-judul>{{ product.judul }}</h3>
+				</div>
+				
+				<div class="product-price">
+					<span class="new-price" data-harga>{{ product.harga }}</span>
+
+					<span class="old-price"><del data-harga-lama>{{ product.harga_lama }}</del></span>
+				</div>
+
+				<div class="wrapper-btn">
+					<button class="hidden" @click="showModal(product)">Quick Tool</button>
+				</div>
+
+				<div hidden>
+					<div data-pelapak>{{ product.pelapak }}</div>
+					<div data-stok>{{ product.stok }}</div>
+					<img :src="product.owner" alt="logo kotak" data-product-owner>
+					
+					
+						<ul data-deskripsi>
+							<li v-for="des in product.desc">{{ des }}</li>
+						</ul>
+					
+				</div>
+			</div>
+			<!-- end detail product -->
+
+		</div>
+		<!-- end wrapper product -->
+
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			  <div class="modal-content">
+			    <span class="close">×</span>
+
+			   <!-- detail product AMAZON -->
+				<div id="wrapper-detail-product">
+					
+					<div class="left-side">
+						<div class="disc-modal" data-diskon>{{ modal.diskon }}</div>
+						<img :src="modal.gambar" data-gambar>
+					</div>
+
+					<div class="right-side">
+						<h3 data-judul>{{ modal.judul }}</h3>
+						<span class="price-detail-product" data-harga>{{ modal.harga }}</span>
+						<span class="price-detail-product-old" data-harga-lama>{{ modal.harga_lama }}</span><br>
+
+						<div class="product-stock">
+							<strong class="product-stock-total" data-stok>{{ modal.stok }}</strong>
+						</div>
+						
+						<div class="product-owner">
+							<img :src="modal.owner" data-product-owner>
+							<h3 data-pelapak>{{ modal.pelapak }}</h3>
+						</div>
+
+						<div class="content">
+							<h3>Deskripsi</h3>
+							<ul data-deskripsi>
+								<li v-for="des in modal.desc">{{ des }}</li>
+							</ul>
+						</div>
+
+						<button>Beli</button>
+					</div>
+				</div>
+					
+			<!-- end detali product AMAZON -->
+
+			  </div>
+		</div>
+	</div>
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.19/vue.min.js"></script>
+	<script>
+		// Get the modal
+		var modal = $('#myModal');
+
+		// Get the <span> element that closes the modal
+		// When the user clicks on <span> (x), close the modal
+		$('.close').click(function(event) {
+			modal.css('display', 'none');
+		});
+
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		    if (event.target == modal.get(0)) {
+		       modal.css('display', 'none');
+		    }
+		}
+	</script>
+
+	<script>
+		new Vue({
+			el: '#all',
+			data: {
+				products: [
+					{ judul: 'Sale Off 50% # Jersey Sky Import 2014 Size M L Xl Xxl', diskon: '10%', harga: 'Rp65.000', harga_lama: 'Rp60.000', stok: '>50', pelapak: 'Souvignon', owner:'img/logo3.jpg', gambar: 'img/chrome.jpg', desc: ['Fungsi untuk mirroring smartphone atau PC ke layar monitor/ LCD/ LED.', 'Google Chromecast generasi kedua.', 'Bentuk bulat seperti disc lebih mudah dipasang di layar monitor.', 'Wifi lebih kencang dari generasi pertama 802.11ac & 5GHz','Dilengkapi antena untuk memperkencang sinyal Wi-Fi.']},
+					{ judul: 'Gelang Survival Paracord',  diskon:'Promo', harga: 'Rp 64.000', stok: '>50', pelapak: 'TDSTORE', owner: 'img/logo_kotak.jpg', gambar:'img/gelang.jpg', desc: ['Peluit pada gelang untuk keadaan darurat.', 'Dengan Pemantik batu api', 'Scraper dapat digunakan sebagai pisau.']},
+					{ judul: 'Piano,Keyboard Techno T5000', diskon: 'Promo', harga: 'Rp300.000', stok: '>100', pelapak: 'Stevannie Toys', gambar: 'img/keyboard.jpg', owner:'img/logo-stevanie.png', desc: ['Keyboard besar layar LED ukuran 69x8x23cm bisa colok listrik dan ada microfon.', '49 accordion keys', 'Tone 1-10 ( melodi )']},
+					{ judul: 'Best Seller !! [Bonus Tas/Sarung ]Matras Yoga / Yoga Mat', diskon: '5%', harga: 'Rp 191.000', harga_lama: 'Rp 201.000', stok: '>100', pelapak: 'Stevannie Toys', gambar: 'img/yoga.jpg', owner:'img/logo-stevanie.png', desc:['Matras Yoga Bahan Anti Slip , Tidak Licin , Good Quality , Good Price', 'WARNA DIKIRIM RANDOM !!', 'SUDAH TERMASUK TAS.']},
+					{ judul: 'ic Wireless Aiwa Na 801 Vhf ( Headset )', diskon: '11%', harga: 'Rp 200.000', harga_lama: 'Rp 225.000', stok: '>100', pelapak: 'Stevannie Toys', gambar: 'img/mic.jpg', owner:'img/logo-stevanie.png', desc: ['Mic wireless Aiwa NA 801 VHF', '1bh mic headset + transmitter','SUDAH TERMASUK TAS.','1bh baterai 9v']},
+				],
+				modal: {}
+			},
+			methods: {
+				showModal: function(product) {
+					this.modal = product;
+					modal.css('display', 'block');
+				}
+			}
+		})
+	</script>
+
+
+</body>
+</html>
